@@ -5,19 +5,14 @@
       <el-form-item label="用户名：" prop="username">
         <el-input type="text" v-model="ruleForm.username"></el-input>
       </el-form-item>
-      <el-form-item label="密码：" prop="password">
+      <el-form-item label="新密码：" prop="password">
         <el-input type="password" v-model="ruleForm.password"></el-input>
       </el-form-item>
       <el-row>
-        <el-col :span="9" :offset="6">
-          <router-link style="float: left" to="/resetPassword">forgot password</router-link>
-        </el-col>
-        <el-col :span="9">
-          <router-link style="float: right" to="/register">注册</router-link>
-        </el-col>
+        <el-button class="but" type="primary" @click="login('ruleForm')">changePassword</el-button>
       </el-row>
       <el-row>
-        <el-button class="but" type="primary" @click="login('ruleForm')">login</el-button>
+        <router-link style="float: right" to="/login">back</router-link>
       </el-row>
     </el-form>
   </el-card>
@@ -51,12 +46,10 @@ export default {
             password: this.ruleForm.password
           }
           console.log(params);
-          this.$http.post('/api/login/getAccount', params)
+          this.$http.post('/api/login/changeAccount', params)
             .then((response) => {
-              if (response.body.length) {
-                this.$message.success({
-                  message: '登录成功！'
-                });
+              if (response.ok) {
+                this.$router.push({ path: 'login' })
               }
               console.log(response);
             })

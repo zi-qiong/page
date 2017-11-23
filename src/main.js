@@ -7,6 +7,7 @@ import eruda from 'eruda'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueResource from 'vue-resource'
+import axios from 'axios'
 
 eruda.init(VueResource)
 
@@ -16,6 +17,7 @@ Vue.use(VueResource)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  axios,
   router,
   template: '<App/>',
   components: { App }

@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/api/login/createAccount', (req, res) => {
   let newAccount = new models.Login({
-    account: req.body.account,
+    username: req.body.username,
     password: req.body.password
   })
 
@@ -19,10 +19,31 @@ router.post('/api/login/createAccount', (req, res) => {
   })
 })
 
-router.get('/api/login/getAccount', (req, res) => {
-  models.Login.find((err, data) => {
+router.post('/api/login/getAccount', (req, res) => {
+  let account = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  console.log(account);
+  models.Login.find(account, (err, data) => {
     if (err) {
-      res.send(err);
+      res.send('err');
+    } else {
+      res.send(data)
+    }
+  })
+})
+
+router.post('/api/login/changeAccount', (req, res) => {
+  let account = {
+    username: req.body.username
+  }
+  let newAccount = {
+    password: req.body.password
+  }
+  models.Login.update(account, newAccount, (err, data) => {
+    if (err) {
+      res.send('err');
     } else {
       res.send(data)
     }

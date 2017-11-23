@@ -6,7 +6,7 @@ db.once('error', () => console.log('Mongo connect error'))
 db.once('open', () => console.log('Mongo connection successed'))
 
 const loginSchema = mongoose.Schema({
-  account: String,
+  username: String,
   password: String
 })
 
